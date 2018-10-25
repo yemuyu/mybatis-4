@@ -93,6 +93,7 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 
 /**
  * @author Clinton Begin
+ * 保存mybatis中几乎全部的配置,mybatis初始化时创建且全局唯一
  */
 public class Configuration {
 
@@ -576,6 +577,7 @@ public class Configuration {
       executor = new SimpleExecutor(this, transaction);
     }
     if (cacheEnabled) {
+      //CachingExecutor使用装饰器模式
       executor = new CachingExecutor(executor);
     }
     executor = (Executor) interceptorChain.pluginAll(executor);
